@@ -6,8 +6,6 @@ import flixel.group.FlxSpriteGroup;
 import ui.FlxVirtualPad;
 import ui.Hitbox;
 
-import Config;
-
 class Mobilecontrols extends FlxSpriteGroup
 {
 	public var mode:ControlsGroup = HITBOX;
@@ -15,15 +13,14 @@ class Mobilecontrols extends FlxSpriteGroup
 	public var _hitbox:Hitbox;
 	public var _virtualPad:FlxVirtualPad;
 
-	var config:Config;
+	var config:ControlsConfig;
 
 	public function new() 
 	{
 		super();
 		
-		config = new Config();
+		config = new ControlsConfig();
 
-		// load control mode num from Config.hx
 		mode = getModeFromNumber(config.getcontrolmode());
 		trace(config.getcontrolmode());
 

@@ -27,24 +27,32 @@ class TitleVideo extends FlxState
 
 	var wackyImage:FlxSprite;
 
-	var oldFPS:Int = VideoHandler.MAX_FPS;
-
-	var video:VideoHandler;
-
 	override public function create():Void
 	{
 
 		super.create();
 
-		FlxG.sound.cache(Paths.music("klaskiiLoop"));
+		if(!Main.novid)
+		{
+			FlxG.switchState(new VideoState('assets/videos/klaskiiTitle.webm', function(){
 
-		FlxG.camera.flash(FlxColor.WHITE, 60);
-		FlxG.sound.playMusic(Paths.music("klaskiiLoop"), 0.75);
-		Conductor.changeBPM(158);
-		FlxG.switchState(new TitleScreen());
+				FlxG.camera.flash(FlxColor.WHITE, 60);
+				FlxG.sound.playMusic(Paths.music("klaskiiLoop"), 0.75);
+				Conductor.changeBPM(158);
+			    FlxG.switchState(new TitleScreen());
+			}, 90, true));
+		}
+		else
+		{
+			FlxG.camera.flash(FlxColor.WHITE, 60);
+			FlxG.sound.playMusic(Paths.music("klaskiiLoop"), 0.75);
+			Conductor.changeBPM(158);
+			FlxG.switchState(new TitleScreen());
+		}
 	}
 
-	override public function update(elapsed:Float){
+	override public function update(elapsed:Float)
+	{
 
 		super.update(elapsed);
 
