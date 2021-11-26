@@ -1,9 +1,5 @@
 package;
 
-#if sys
-import sys.FileSystem;
-#end
-
 import flixel.graphics.frames.FlxAtlasFrames;
 
 class Paths
@@ -14,14 +10,7 @@ class Paths
     inline static public function file(key:String, location:String, extension:String):String{
 
         var data:String = 'assets/$location/$key.$extension';
-        /*#if override
-        if(FileSystem.exists('override/$location/$key.$extension')){
-            data = 'override/$location/$key.$extension';
-            //trace("OVERRIDE FOR " + key + " FOUND!");
-        }
-        #end*/
         return data;
-
     }
 
     inline static public function image(key:String):Dynamic{
@@ -65,10 +54,6 @@ class Paths
 
     inline static public function getPackerAtlas(key:String){
         return FlxAtlasFrames.fromSpriteSheetPacker(image(key), text(key, "images"));
-    }
-
-    inline static public function video(key:String){
-        return file(key, "videos", "mp4");
     }
     
     inline static public function font(key:String, ?extension:String = "ttf"){

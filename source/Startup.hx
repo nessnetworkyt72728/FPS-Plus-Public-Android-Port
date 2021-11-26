@@ -60,10 +60,13 @@ class Startup extends FlxState
 
 	override function create()
 	{
-
+        #if android
+        FlxG.android.preventDefaultKeys = [BACK];
+        #end
+        
         FlxG.mouse.visible = false;
         FlxG.sound.muteKeys = null;
-
+        
         FlxG.save.bind('data');
 		Highscore.load();
 		KeyBinds.keyCheck();

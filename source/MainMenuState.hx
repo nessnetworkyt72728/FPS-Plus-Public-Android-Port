@@ -34,7 +34,7 @@ class MainMenuState extends MusicBeatState
 	override function create()
 	{
 
-		openfl.Lib.current.stage.frameRate = 144;
+		openfl.Lib.current.stage.frameRate = 60;
 
 		if (!FlxG.sound.music.playing)
 		{	
@@ -108,6 +108,10 @@ class MainMenuState extends MusicBeatState
 		
 		//Offset Stuff
 		Config.reload();
+
+		#if mobileC
+		addVirtualPad(UP_DOWN, A_B);
+		#end
 
 		super.create();
 	}

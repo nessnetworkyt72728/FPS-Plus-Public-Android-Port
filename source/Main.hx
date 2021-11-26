@@ -23,16 +23,32 @@ class Main extends Sprite
 
 		addChild(new FlxGame(1280, 720, Startup, 1, 60, 60, true));
 
-		//#if !mobile
 		fpsDisplay = new FPS(10, 3, 0xFFFFFF);
 		fpsDisplay.visible = false;
 		addChild(fpsDisplay);
-		//#end
 
-		//On web builds, video tends to lag quite a bit, so this just helps it run a bit faster.
-		#if web || android
-		VideoHandler.MAX_FPS = 30;
-		#end
+		if(!novid){
+			var ourSource:String = "assets/videos/DO NOT DELETE OR GAME WILL CRASH/dontDelete.webm";
+
+			#if web
+			var str1:String = "HTML CRAP";
+			var vHandler = new VideoHandler();
+			vHandler.init1();
+			vHandler.video.name = str1;
+			addChild(vHandler.video);
+			vHandler.init2();
+			GlobalVideo.setVid(vHandler);
+			vHandler.source(ourSource);
+			#elseif sys
+			var str1:String = "WEBM SHIT"; 
+			var webmHandle = new WebmHandler();
+			webmHandle.source(ourSource);
+			webmHandle.makePlayer();
+			webmHandle.webm.name = str1;
+			addChild(webmHandle.webm);
+			GlobalVideo.setWebm(webmHandle);
+			#end
+		}
 
 		trace("-=Args=-");
 		trace("novid: " + novid);
