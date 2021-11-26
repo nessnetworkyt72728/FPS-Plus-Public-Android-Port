@@ -20,7 +20,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
 //import polymod.Polymod;
@@ -111,6 +110,16 @@ class TitleScreen extends MusicBeatState
 		}
 
 		var pressedEnter:Bool = controls.ACCEPT || controls.PAUSE;
+
+		#if mobile
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
+			{
+				pressedEnter = true;
+			}
+		}
+		#end
 
 		if (pressedEnter && !transitioning)
 		{

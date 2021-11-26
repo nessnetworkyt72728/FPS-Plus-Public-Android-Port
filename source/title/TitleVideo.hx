@@ -49,7 +49,7 @@ class TitleVideo extends FlxState
 				FlxG.sound.playMusic(Paths.music("klaskiiLoop"), 0.75);
 				Conductor.changeBPM(158);
 				FlxG.switchState(new TitleScreen());
-				#if web
+				#if web || android
 					VideoHandler.MAX_FPS = oldFPS;
 				#end
 			}, false, true);
