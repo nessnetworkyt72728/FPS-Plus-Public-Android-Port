@@ -60,14 +60,14 @@ jobs:
           haxelib install hscript --quiet
           haxelib git faxe https://github.com/uhrobots/faxe --quiet
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc --quiet
-       
-          haxelib install actuate 
+          haxelib git extension-webm https://github.com/jigsaw-4277821/extension-webm --quiet
+          haxelib install actuate --quiet
           haxelib list
           
       - name: Build Log
         run: |
           haxelib run lime setup android
-          haxelib run lime build android -Dci
+          haxelib run lime build android -final
           
       - uses: actions/upload-artifact@v2
         with:
