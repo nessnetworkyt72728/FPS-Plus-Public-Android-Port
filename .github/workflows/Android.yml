@@ -71,5 +71,5 @@ jobs:
           
       - uses: actions/upload-artifact@v2
         with:
-          name: Android Build
+          name: Android Build FPS Plus
           path: export/release/android/bin/app/build/outputs/apk/debug
