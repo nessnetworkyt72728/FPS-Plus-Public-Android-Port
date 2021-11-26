@@ -127,7 +127,7 @@ class Startup extends FlxState
         loadingText.setFormat(Paths.font("vcr"), 24, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
         add(loadingText);
 
-        #if web || android
+        #if mobile
         FlxG.sound.play(Paths.sound("tick"), 0);   
         #end
 
@@ -145,7 +145,7 @@ class Startup extends FlxState
         
         if(splash.animation.curAnim.finished && splash.animation.curAnim.name == "start" && !cacheStart){
             
-            #if web || android
+            #if mobile
             new FlxTimer().start(1.5, function(tmr:FlxTimer)
             {
                 songsCached = true;
@@ -153,7 +153,7 @@ class Startup extends FlxState
                 graphicsCached = true;
             });
             #else
-            preload(); 
+                 preload(); 
             #end
             
             cacheStart = true;
