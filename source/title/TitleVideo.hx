@@ -39,8 +39,8 @@ class TitleVideo extends FlxState
 				FlxG.camera.flash(FlxColor.WHITE, 60);
 				FlxG.sound.playMusic(Paths.music("klaskiiLoop"), 0.75);
 				Conductor.changeBPM(158);
-			    FlxG.switchState(new TitleScreen());
-			}, 90, true));
+			        FlxG.switchState(new TitleScreen());
+			}));
 		}
 		else
 		{
