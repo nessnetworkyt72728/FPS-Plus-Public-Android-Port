@@ -21,16 +21,16 @@ class Main extends Sprite
 		flippymode = Sys.args().contains("-flippymode");
 		#end
 
-		addChild(new FlxGame(0, 0, Startup, 1, 144, 144, true));
+		addChild(new FlxGame(1280, 720, Startup, 1, 60, 60, true));
 
-		#if !mobile
+		//#if !mobile
 		fpsDisplay = new FPS(10, 3, 0xFFFFFF);
 		fpsDisplay.visible = false;
 		addChild(fpsDisplay);
-		#end
+		//#end
 
 		//On web builds, video tends to lag quite a bit, so this just helps it run a bit faster.
-		#if web
+		#if web || android
 		VideoHandler.MAX_FPS = 30;
 		#end
 

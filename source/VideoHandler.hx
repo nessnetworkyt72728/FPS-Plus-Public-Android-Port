@@ -72,7 +72,7 @@ class VideoHandler extends FlxSprite
 		playDesktopMP4(videoPath, callback, repeat, canSkip);
 		#end
 
-		#if web
+		#if web || android
 		playWebMP4(videoPath, callback, repeat, canSkip);
 		#end
 
@@ -183,7 +183,7 @@ class VideoHandler extends FlxSprite
 
 	//===========================================================================================================//
 
-	#if web
+	#if web || android
 	/**
 		Plays MP4s using OpenFL NetStreams and Videos as the source.
 		Only works on web builds.
@@ -331,7 +331,7 @@ class VideoHandler extends FlxSprite
 		}
 		#end
 
-		#if web
+		#if web || android
 		if(FlxG.keys.justPressed.MINUS || FlxG.keys.justPressed.PLUS){
 			setSoundTransform(__muted);
 		}
@@ -375,7 +375,7 @@ class VideoHandler extends FlxSprite
 		}
 		#end
 
-		#if web
+		#if web || android
 		if(!completed){
 			netClean();
 		}
@@ -394,7 +394,7 @@ class VideoHandler extends FlxSprite
 		vlcBitmap.pause();
 		#end
 
-		#if web
+		#if web || android
 		netStream.pause();
 		#end
 
@@ -411,7 +411,7 @@ class VideoHandler extends FlxSprite
 		vlcBitmap.resume();
 		#end
 
-		#if web
+		#if web || android
 		netStream.resume();
 		#end
 
@@ -425,7 +425,7 @@ class VideoHandler extends FlxSprite
 
 	private function set_muted(value:Bool):Bool{
 
-		#if web
+		#if web || android
 		if(startDrawing){
 			setSoundTransform(value);
 		}
