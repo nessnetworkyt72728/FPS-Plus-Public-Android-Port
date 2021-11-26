@@ -14,6 +14,8 @@
 
 	<!--Minimum without FLX_NO_GAMEPAD: 11.8, without FLX_NO_NATIVE_CURSOR: 11.2-->
 	<set name="SWF_VERSION" value="11.8" />
+	
+	<define name="mobileC" if="mobile" />	
 
 	<!-- ____________________________ Window Settings ___________________________ -->
 
@@ -44,9 +46,6 @@
 	<assets path="assets/data" />
 	<assets path="assets/videos" />
 	<!-- <template path='mods' /> -->
-
-	<assets path="plugins/" rename='' if="windows"/>
-	<assets path="dlls/" rename='' if="windows"/>
 	
 	<!-- <library name="noPreload" preload='false'/> -->
 	<!-- <library name="noPreload"/> -->
@@ -99,9 +98,8 @@
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
 	<haxelib name="faxe" if='switch'/>
-	<!--haxelib name="polymod"/-->
-	<!--haxelib name="actuate" /-->
-	<!--haxelib name="extension-webm" if="desktop"/-->
+	<haxelib name="actuate"/>
+	<haxelib name="extension-webm"/>
 
 	<!-- <haxelib name="markdown" /> -->
 	<!-- <haxelib name="HtmlParser" /> -->
