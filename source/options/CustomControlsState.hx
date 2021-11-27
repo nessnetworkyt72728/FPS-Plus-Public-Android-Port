@@ -53,15 +53,6 @@ class CustomControlsState extends MusicBeatSubstate
 
 		//init config
 		config = new ControlsConfig();
-		
-		// bg
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menu/Menu' + "_" + FlxG.save.data.menuskin));
-		bg.scrollFactor.x = 0;
-		bg.scrollFactor.y = 0.18;
-		bg.setGraphicSize(Std.int(bg.width * 1.1));
-		bg.updateHitbox();
-		bg.screenCenter();
-		bg.antialiasing = true;
 
 		// load curSelected
 		curSelected = config.getcontrolmode();
@@ -111,7 +102,7 @@ class CustomControlsState extends MusicBeatSubstate
 
 		var savebutton = new FlxUIButton((exitbutton.x + exitbutton.width + 25),25,"exit and save",() -> {
 			save();
-			FlxG.switchState(new OptionsState());
+			FlxG.switchState(new config.ConfigMenu());
 		});
 		savebutton.resize(250,50);
 		savebutton.setLabelFormat("VCR OSD Mono",24,FlxColor.BLACK,"center");
@@ -123,9 +114,6 @@ class CustomControlsState extends MusicBeatSubstate
 		importbutton = new FlxUIButton(exportbutton.x, 100, "import", () -> { loadfromclipboard(_pad); });
 		importbutton.resize(125,50);
 		importbutton.setLabelFormat("VCR OSD Mono", 24, FlxColor.BLACK,"center");
-
-		// add bg
-		add(bg);
 
 		// add buttons
 		add(exitbutton);
@@ -166,7 +154,7 @@ class CustomControlsState extends MusicBeatSubstate
 		var androidback:Bool = false;
 		#end
 		if (exitbutton.justReleased || androidback){
-			FlxG.switchState(new OptionsState());
+			FlxG.switchState(new config.ConfigMenu());
 		}
 		
 		for (touch in FlxG.touches.list){
