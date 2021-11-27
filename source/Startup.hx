@@ -17,7 +17,7 @@ using StringTools;
 class Startup extends FlxState
 {
 
-    var nextState:FlxState = new TitleVideo();
+    var nextState:FlxState = new TitleIntroText();
 
     var splash:FlxSprite;
     //var dummy:FlxSprite;
