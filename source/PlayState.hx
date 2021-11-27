@@ -905,10 +905,10 @@ class PlayState extends MusicBeatState
 		scoreTxt.scrollFactor.set();
 
 		creditTxt = new FlxText(876, 648, 348);
-        creditTxt.text = 'PORTED BY\nM.A. JIGSAW';
-        creditTxt.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, RIGHT);
-        creditTxt.setBorderStyle(OUTLINE, FlxColor.BLACK, 3, 1);       
-        creditTxt.scrollFactor.set();
+                creditTxt.text = 'PORTED BY\nM.A. JIGSAW';
+                creditTxt.setFormat(Paths.font("vcr"), 30, FlxColor.WHITE, RIGHT);
+                creditTxt.setBorderStyle(OUTLINE, FlxColor.BLACK, 3, 1);       
+                creditTxt.scrollFactor.set();
 
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
