@@ -267,11 +267,13 @@ class ConfigMenu extends MusicBeatState
 						}
 
 						if(controls.ACCEPT){
+						        #if desktop
 							canChangeItems = false;
 							FlxG.sound.music.fadeOut(0.3);
 							writeToConfig();
 							AutoOffsetState.forceEasterEgg = FlxG.keys.pressed.SHIFT ? 1 : (FlxG.keys.pressed.CONTROL ? -1 : 0);
 							switchState(new AutoOffsetState());
+						        #end
 						}
 						
 					case 1: //Accuracy
