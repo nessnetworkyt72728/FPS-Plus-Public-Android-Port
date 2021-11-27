@@ -54,6 +54,9 @@ import flixel.util.FlxTimer;
 //import openfl.display.BlendMode;
 //import openfl.display.StageQuality;
 //import openfl.filters.ShaderFilter;
+#if mobileC
+import ui.Mobilecontrols;
+#end
 
 using StringTools;
 
@@ -217,6 +220,7 @@ class PlayState extends MusicBeatState
 	var talking:Bool = true;
 	var songScore:Int = 0;
 	var scoreTxt:FlxText;
+	var creditTxt:FlxText;
 
 	public static var campaignScore:Int = 0;
 
@@ -235,6 +239,10 @@ class PlayState extends MusicBeatState
 	public static var sectionStartTime:Float =  0;
 
 	private var meta:SongMetaTags;
+
+	#if mobileC
+	var mcontrols:Mobilecontrols; 
+	#end
 	
 	override public function create()
 	{
@@ -896,6 +904,12 @@ class PlayState extends MusicBeatState
 		scoreTxt.setFormat(Paths.font("vcr"), 22, FlxColor.WHITE, FlxTextAlign.CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 
+		creditTxt = new FlxText(876, 648, 348);
+        creditTxt.text = 'PORTED BY\nM.A. JIGSAW';
+        creditTxt.setFormat(Paths.font("vcr.ttf"), 30, FlxColor.WHITE, RIGHT);
+        creditTxt.setBorderStyle(OUTLINE, FlxColor.BLACK, 3, 1);       
+        creditTxt.scrollFactor.set();
+
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		
@@ -907,6 +921,7 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 		add(iconP1);
 		add(scoreTxt);
+		add(creditTxt);
 
 		strumLineNotes.cameras = [camHUD];
 		notes.cameras = [camHUD];
@@ -915,6 +930,7 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
+		credit.cameras = [camHUD];		
 		doof.cameras = [camHUD];
 
 		healthBar.visible = false;
@@ -922,6 +938,30 @@ class PlayState extends MusicBeatState
 		iconP1.visible = false;
 		iconP2.visible = false;
 		scoreTxt.visible = false;
+		credit.visible = false;		
+
+		#if mobileC
+			mcontrols = new Mobilecontrols();
+			switch (mcontrols.mode)
+			{
+				case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
+					controls.setVirtualPad(mcontrols._virtualPad, FULL, NONE);
+				case HITBOX:
+					controls.setHitBox(mcontrols._hitbox);
+				default:
+			}
+			trackedinputs = controls.trackedinputs;
+			controls.trackedinputs = [];
+
+			var camcontrol = new FlxCamera();
+			FlxG.cameras.add(camcontrol);
+			camcontrol.bgColor.alpha = 0;
+			mcontrols.cameras = [camcontrol];
+
+			mcontrols.visible = false;
+
+			add(mcontrols);
+		#end
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -1093,6 +1133,9 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
+		#if mobileC
+		mcontrols.visible = true;
+		#end	
 		inCutscene = false;
 
 		healthBar.visible = true;
@@ -1100,6 +1143,7 @@ class PlayState extends MusicBeatState
 		iconP1.visible = true;
 		iconP2.visible = true;
 		scoreTxt.visible = true;
+		creditTxt.visible = true;
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
@@ -1600,7 +1644,7 @@ class PlayState extends MusicBeatState
 				scoreTxt.text = "Score:" + songScore + " | Misses:" + misses + " | Accuracy:" + truncateFloat(accuracy, 2) + "%";
 		}
 
-		if (controls.PAUSE && startedCountdown && canPause)
+		if (controls.PAUSE #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -1953,6 +1997,9 @@ class PlayState extends MusicBeatState
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
+		#if mobileC
+		mcontrols.visible = false;
+		#end
 		if (SONG.validScore)
 		{
 			#if !switch
