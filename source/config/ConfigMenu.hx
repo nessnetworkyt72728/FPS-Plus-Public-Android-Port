@@ -61,7 +61,8 @@ class ConfigMenu extends MusicBeatState
 									"BACKGROUND DIM",
 									"[PRELOAD SETTINGS]",
 									"CONTROLLER SCHEME",
-									"[EDIT KEY BINDS]"
+									"[EDIT KEY BINDS]",
+		                                                        "[MOBILE CONTROLS]"
 									];
 		
 	//Any descriptions that say TEMP are replaced with a changing description based on the current config setting.
@@ -78,7 +79,8 @@ class ConfigMenu extends MusicBeatState
 									"Adjusts how dark the background is.\nIt is recommended that you use the HUD combo display with a high background dim.",
 									"Change what assets the game preloads on startup.\n[A restart is required for these changes.]",
 									"TEMP",
-									"Change key binds."
+									"Change key binds.",
+		                                                        "Change The Controls."
 									];
 
 	final ghostTapDesc:Array<String> = [
@@ -188,6 +190,10 @@ class ConfigMenu extends MusicBeatState
 		add(backText);
 
 		textUpdate();
+		
+		#if mobileC
+		addVirtualPad(FULL, A_B);
+		#end
 
 		customTransIn = new WeirdBounceIn(0.6);
 		customTransOut = new WeirdBounceOut(0.6);
@@ -260,7 +266,7 @@ class ConfigMenu extends MusicBeatState
 							leftRightCount = 0;
 						}
 
-						if(FlxG.keys.justPressed.ENTER){
+						if(controls.ACCEPT){
 							canChangeItems = false;
 							FlxG.sound.music.fadeOut(0.3);
 							writeToConfig();
@@ -488,6 +494,13 @@ class ConfigMenu extends MusicBeatState
 							writeToConfig();
 							switchState(new KeyBindMenu());
 						}
+					case 12: //Mobile Controls
+						if (controls.ACCEPT) {
+							FlxG.sound.play(Paths.sound('scrollMenu'));
+							canChangeItems = false;
+							writeToConfig();
+							switchState(new options.CustomControlsState());
+						}		
 					
 			}
 		}
