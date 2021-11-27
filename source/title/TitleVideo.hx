@@ -32,23 +32,10 @@ class TitleVideo extends FlxState
 
 		super.create();
 
-		if(!Main.novid)
-		{
-			FlxG.switchState(new VideoState('assets/videos/klaskiiTitle.webm', function(){
-
-				FlxG.camera.flash(FlxColor.WHITE, 60);
-				FlxG.sound.playMusic(Paths.music("klaskiiLoop"), 0.75);
-				Conductor.changeBPM(158);
-			        FlxG.switchState(new TitleScreen());
-			}));
-		}
-		else
-		{
-			FlxG.camera.flash(FlxColor.WHITE, 60);
-			FlxG.sound.playMusic(Paths.music("klaskiiLoop"), 0.75);
-			Conductor.changeBPM(158);
-			FlxG.switchState(new TitleScreen());
-		}
+		FlxG.camera.flash(FlxColor.WHITE, 60);
+		FlxG.sound.playMusic(Paths.music("klaskiiLoop"), 0.75);
+		Conductor.changeBPM(158);
+		FlxG.switchState(new TitleScreen());
 	}
 
 	override public function update(elapsed:Float)
