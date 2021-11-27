@@ -930,7 +930,7 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
-		credit.cameras = [camHUD];		
+		creditTxt.cameras = [camHUD];		
 		doof.cameras = [camHUD];
 
 		healthBar.visible = false;
@@ -938,7 +938,7 @@ class PlayState extends MusicBeatState
 		iconP1.visible = false;
 		iconP2.visible = false;
 		scoreTxt.visible = false;
-		credit.visible = false;		
+		creditTxt.visible = false;		
 
 		#if mobileC
 			mcontrols = new Mobilecontrols();
