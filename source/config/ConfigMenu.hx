@@ -496,7 +496,7 @@ class ConfigMenu extends MusicBeatState
 							writeToConfig();
 							switchState(new KeyBindMenu());
 						}
-					case 12: //Mobile Controls
+					case 13: //Mobile Controls
 						if (controls.ACCEPT) {
 							FlxG.sound.play(Paths.sound('scrollMenu'));
 							canChangeItems = false;
